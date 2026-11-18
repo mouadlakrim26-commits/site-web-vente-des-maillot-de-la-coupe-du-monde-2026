@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MUNDIAL KITS | Official World Cup Jerseys &amp; Custom Printing</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="js/tailwind.config.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans antialiased">
+
+  <!-- Top Facebook Ad Promo Bar -->
+  <div class="bg-emerald-600 text-white text-center py-2 px-4 text-xs sm:text-sm font-semibold tracking-wide">
+    🔥 WORLD CUP BUNDLE: BUY 2 JERSEYS GET <span class="underline decoration-yellow-300">15% OFF</span> + FREE NAME &amp; NUMBER PRINTING
+  </div>
+
+  <!-- Navbar -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-slate-200 px-4 sm:px-8 py-3.5">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+      <div class="flex items-center gap-2.5">
+        <div class="w-9 h-9 rounded-lg bg-slate-900 text-white flex items-center justify-center font-display font-bold text-xl">M</div>
+        <div>
+          <div class="font-display font-bold text-xl tracking-tight leading-none">MUNDIAL<span class="text-emerald-600">KITS</span></div>
+          <div class="text-[10px] text-slate-500 font-medium uppercase tracking-widest">World Cup Collection</div>
+        </div>
+      </div>
+
+      <!-- Search Bar -->
+      <div class="hidden md:flex flex-1 max-w-md relative">
+        <input id="search-input" oninput="renderCatalog()" type="text" placeholder="Search country or player (e.g. France, Netherlands, Mexico, Messi)..."
+          class="w-full bg-slate-100 border border-slate-200 rounded-full px-4 py-2 text-sm focus:bg-white focus:border-emerald-600 outline-none" />
+      </div>
+
+      <div class="flex items-center gap-3">
+        <!-- Currency Switcher -->
+        <select id="currency-select" onchange="changeCurrency(this.value)" class="bg-slate-100 border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs font-bold cursor-pointer">
+          <option value="USD">USD ($)</option>
+          <option value="MAD">MAD (DH)</option>
+        </select>
+
+        <!-- Cart Button -->
+        <button onclick="toggleCart(true)" class="relative bg-slate-900 hover:bg-slate-800 text-white px-4 py-2 rounded-lg text-sm font-semibold flex items-center gap-2 transition">
+          <span>🛒 Cart</span>
+          <span id="cart-badge" class="bg-emerald-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Banner -->
+  <section class="bg-slate-900 text-white py-12 sm:py-16 px-4 sm:px-8 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-8 items-center">
+      <div class="space-y-4 z-10">
+        <span class="inline-block bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+          48+ National Teams Available
+        </span>
+        <h1 class="font-display text-4xl sm:text-6xl font-bold uppercase leading-[1.05]">
+          Wear Your Nation.<br/><span class="text-emerald-400">Any Country. Any Name.</span>
+        </h1>
+        <p class="text-slate-300 text-sm sm:text-base max-w-lg">
+          Breathable stadium &amp; player-spec kits for every World Cup nation. Customize with your favorite star or your own name &amp; number. Cash on Delivery &amp; Worldwide Express Shipping.
+        </p>
+        <div class="flex flex-wrap gap-3 pt-2 text-xs font-semibold text-slate-300">
+          <span class="bg-slate-800 px-3 py-1.5 rounded-md">✓ Sizes S to XXL</span>
+          <span class="bg-slate-800 px-3 py-1.5 rounded-md">✓ Fan &amp; Player Versions</span>
+          <span class="bg-slate-800 px-3 py-1.5 rounded-md">✓ Cash on Delivery</span>
+        </div>
+      </div>
+
+      <!-- Auto-Refreshing Featured Showcase Card (rotates every 6 seconds) -->
+      <div class="bg-slate-800/70 border border-slate-700 rounded-2xl p-6 space-y-4">
+        <div id="hero-showcase-inner" class="flex items-center justify-between gap-4 transition-all duration-300">
+          <div>
+            <div id="hero-badge" class="text-xs text-emerald-400 font-bold uppercase">🔥 Trending #1 on Facebook</div>
+            <div id="hero-title" class="font-display text-2xl font-bold mt-1 uppercase">MOROCCO HOME KIT</div>
+            <div id="hero-subtitle" class="text-slate-400 text-xs mt-1">Default: Hakimi #2 • Brahim #10 • Custom Name</div>
+            <button id="hero-btn" onclick="openCustomizer('mar')" class="mt-4 bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold px-4 py-2.5 rounded-lg uppercase tracking-wider transition">
+              Customize Now &rarr;
+            </button>
+          </div>
+          <div id="hero-jersey-preview" class="w-32 sm:w-40 h-36 sm:h-40 shrink-0 flex items-center justify-center"></div>
+        </div>
+        <!-- Slide Indicator Dots -->
+        <div id="hero-dots" class="flex items-center justify-center gap-1.5 pt-1"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Catalog -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-8 py-10">
+    <!-- Mobile Search -->
+    <input id="mobile-search" oninput="document.getElementById('search-input').value=this.value; renderCatalog();" type="text"
+      placeholder="Search country or player..." class="md:hidden w-full mb-4 bg-white border border-slate-200 rounded-xl px-4 py-2.5 text-sm" />
+
+    <!-- Confederation Filters -->
+    <div class="flex flex-wrap items-center justify-between gap-4 mb-8">
+      <div id="region-tabs" class="flex flex-wrap gap-2"></div>
+      <div id="result-count" class="text-xs font-semibold text-slate-500"></div>
+    </div>
+
+    <!-- Jerseys Grid -->
+    <div id="catalog-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+  </main>
+
+  <!-- Customizer Modal -->
+  <div id="customizer-modal" class="fixed inset-0 z-50 hidden bg-black/70 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+    <div class="bg-white rounded-2xl max-w-3xl w-full overflow-hidden shadow-2xl grid md:grid-cols-12 my-auto">
+      <!-- Left: Real Front Jersey Preview -->
+      <div class="md:col-span-5 bg-slate-900 text-white p-6 flex flex-col justify-between items-center text-center">
+        <div class="w-full flex justify-between items-center text-xs text-slate-400">
+          <span id="modal-country-badge" class="font-bold text-white uppercase"></span>
+          <span>Official 2026 Kit</span>
+        </div>
+
+        <div id="modal-jersey-preview" class="w-52 sm:w-56 h-60 my-4 flex items-center justify-center"></div>
+
+        <div class="space-y-2">
+          <div id="modal-print-pill" class="inline-block bg-slate-800 border border-slate-700 rounded-full px-3 py-1 text-xs font-bold text-emerald-400"></div>
+          <div class="text-xs text-slate-400">
+            Name &amp; number heat-pressed in official tournament typography.
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Options -->
+      <div class="md:col-span-7 p-6 space-y-5">
+        <div class="flex justify-between items-start">
+          <div>
+            <h2 id="modal-title" class="font-display text-2xl font-bold uppercase"></h2>
+            <p id="modal-price" class="text-emerald-600 font-bold text-lg"></p>
+          </div>
+          <button onclick="closeCustomizer()" class="text-slate-400 hover:text-slate-900 text-xl font-bold">✕</button>
+        </div>
+
+        <!-- Version -->
+        <div>
+          <label class="block text-xs font-bold uppercase text-slate-500 mb-2">1. Select Version</label>
+          <div class="grid grid-cols-2 gap-2">
+            <button onclick="setOption('version', 'FAN')" id="btn-ver-FAN" class="border rounded-lg p-2.5 text-left text-xs transition">
+              <div class="font-bold">Fan Version</div>
+              <div class="text-slate-500">Regular fit • Standard</div>
+            </button>
+            <button onclick="setOption('version', 'PLAYER')" id="btn-ver-PLAYER" class="border rounded-lg p-2.5 text-left text-xs transition">
+              <div class="font-bold">Player Spec (+$8)</div>
+              <div class="text-slate-500">Slim fit • Breathable mesh</div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Size -->
+        <div>
+          <div class="flex justify-between items-center mb-2">
+            <label class="text-xs font-bold uppercase text-slate-500">2. Select Size</label>
+            <span class="text-[11px] text-emerald-600 font-semibold">True to EU/US fit</span>
+          </div>
+          <div id="size-buttons" class="grid grid-cols-5 gap-2"></div>
+        </div>
+
+        <!-- Player Name & Number -->
+        <div>
+          <label class="block text-xs font-bold uppercase text-slate-500 mb-2">3. Choose Player / Number (Free)</label>
+          <div id="preset-players" class="flex flex-wrap gap-1.5 mb-3"></div>
+          <div class="grid grid-cols-3 gap-2">
+            <input id="custom-name" oninput="updateLivePrint()" maxlength="12" placeholder="CUSTOM NAME" class="col-span-2 border border-slate-300 rounded-lg px-3 py-2 text-xs font-bold uppercase focus:border-emerald-600 outline-none" />
+            <input id="custom-num" oninput="handleNumberInput()" type="number" min="1" max="99" placeholder="#" class="border border-slate-300 rounded-lg px-3 py-2 text-xs font-bold text-center focus:border-emerald-600 outline-none" />
+          </div>
+        </div>
+
+        <!-- Sleeve Patch -->
+        <label class="flex items-center justify-between border border-slate-200 rounded-lg p-3 cursor-pointer hover:bg-slate-50">
+          <div class="text-xs">
+            <div class="font-bold">Add Official World Cup Sleeve Patch</div>
+            <div class="text-slate-500">Gold tournament badge on right sleeve</div>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-bold text-emerald-600">+$3</span>
+            <input id="patch-checkbox" type="checkbox" onchange="updateModalPrice()" class="w-4 h-4 accent-emerald-600" />
+          </div>
+        </label>
+
+        <button onclick="addToCart()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl text-sm uppercase tracking-wider transition shadow-lg shadow-emerald-600/20">
+          Add to Cart &rarr;
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide-Over Cart & Checkout Drawer -->
+  <div id="cart-drawer" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex justify-end">
+    <div class="bg-white w-full max-w-md h-full flex flex-col justify-between shadow-2xl">
+      <div class="p-5 border-b border-slate-200 flex justify-between items-center">
+        <h3 class="font-display text-xl font-bold uppercase">Your Order (<span id="drawer-count">0</span>)</h3>
+        <button onclick="toggleCart(false)" class="text-slate-400 hover:text-slate-900 font-bold text-lg">✕</button>
+      </div>
+
+      <div id="cart-items" class="flex-1 overflow-y-auto p-5 space-y-4"></div>
+
+      <!-- Checkout Form -->
+      <div class="border-t border-slate-200 p-5 bg-slate-50 space-y-3">
+        <div id="bundle-alert" class="hidden bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-2 rounded-lg text-center">
+          🎉 15% Bundle Discount Applied!
+        </div>
+        <div class="flex justify-between text-sm font-bold">
+          <span>Total (Free Shipping):</span>
+          <span id="cart-total" class="text-lg text-emerald-600">$0.00</span>
+        </div>
+
+        <form id="checkout-form" onsubmit="placeOrder(event)" class="space-y-2.5 pt-2">
+          <input required id="cust-name" placeholder="Full Name" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs outline-none focus:border-emerald-600" />
+          <div class="grid grid-cols-2 gap-2">
+            <input required id="cust-phone" placeholder="WhatsApp / Phone" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs outline-none focus:border-emerald-600" />
+            <input required id="cust-city" placeholder="City" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs outline-none focus:border-emerald-600" />
+          </div>
+          <input required id="cust-address" placeholder="Delivery Address" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs outline-none focus:border-emerald-600" />
+          <div class="grid grid-cols-2 gap-2 text-xs font-semibold">
+            <label class="flex items-center gap-2 bg-white border border-slate-300 rounded-lg p-2 cursor-pointer">
+              <input type="radio" name="pay" value="COD" checked class="accent-emerald-600" /> Cash on Delivery
+            </label>
+            <label class="flex items-center gap-2 bg-white border border-slate-300 rounded-lg p-2 cursor-pointer">
+              <input type="radio" name="pay" value="CARD" class="accent-emerald-600" /> Pay by Card
+            </label>
+          </div>
+          <button type="submit" class="w-full bg-slate-900 hover:bg-emerald-600 text-white font-bold py-3 rounded-xl text-xs uppercase tracking-wider transition">
+            Complete Order Now
+          </button>
+        </form>
+
+        <!-- Order Confirmation -->
+        <div id="order-success" class="hidden bg-emerald-50 border border-emerald-200 rounded-xl p-3 text-xs space-y-2">
+          <div class="font-bold text-emerald-800">✅ Order Received!</div>
+          <p class="text-slate-600">Thank you! We will contact you shortly on WhatsApp/Phone to confirm your delivery.</p>
+          <a id="wa-confirm-link" href="#" target="_blank"
+             class="block text-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 rounded-lg transition">
+            💬 Confirm Faster on WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
