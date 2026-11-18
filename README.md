@@ -6,6 +6,12 @@
 
 <img width="1337" height="631" alt="image" src="https://github.com/user-attachments/assets/2215bf71-d87c-42e4-b8d7-d313f6e49411" />
 
+<img width="761" height="540" alt="image" src="https://github.com/user-attachments/assets/63f98ff6-e5c8-437b-a098-f42279734b99" />
+
+<img width="761" height="540" alt="image" src="https://github.com/user-attachments/assets/e7f2e432-8045-499b-80a4-626d84e2ae4b" />
+
+
+
 
 Le projet propose une interface moderne, élégante et responsive permettant aux passionnés de football de découvrir les maillots de différentes sélections nationales.
 
@@ -36,10 +42,12 @@ mundial-kits/
 │   └── style.css
 │
 ├── js/
-│   └── script.js
+│   └── app.js
+|   └──data.js
+|   └──tailwind.config.js
 │
 ├── kits/
-│   └── images des maillots
+│   └── mar.html
 │
 ├── index.html
 │
