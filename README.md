@@ -2,6 +2,9 @@
 
 **MUNDIAL KITS** est un site web e-commerce dédié à la vente de maillots de football des équipes nationales participant à la Coupe du Monde 2026.
 
+<img width="1337" height="631" alt="image" src="https://github.com/user-attachments/assets/2215bf71-d87c-42e4-b8d7-d313f6e49411" />
+
+
 Le projet propose une interface moderne, élégante et responsive permettant aux passionnés de football de découvrir les maillots de différentes sélections nationales.
 
 ## 🚀 Fonctionnalités
@@ -59,6 +62,5 @@ Créer une expérience de boutique en ligne moderne et intuitive autour de l'uni
 ---
 
 **MUNDIAL KITS — WORLD CUP COLLECTION 2026** ⚽
-<img width="1359" height="627" alt="image" src="https://github.com/user-attachments/assets/84591400-c960-46e5-80ae-16133170843f" />
 
 *Passion for Football. Style for Everyone.*
