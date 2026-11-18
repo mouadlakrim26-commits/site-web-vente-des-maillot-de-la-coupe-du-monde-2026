@@ -1,6 +1,8 @@
 # ⚽ MUNDIAL KITS — World Cup Collection 2026
 
 **MUNDIAL KITS** est un site web e-commerce dédié à la vente de maillots de football des équipes nationales participant à la Coupe du Monde 2026.
+<img width="1338" height="630" alt="image" src="https://github.com/user-attachments/assets/8874691c-f65c-48bb-b7f1-fd6543ba7726" />
+
 
 <img width="1337" height="631" alt="image" src="https://github.com/user-attachments/assets/2215bf71-d87c-42e4-b8d7-d313f6e49411" />
 
